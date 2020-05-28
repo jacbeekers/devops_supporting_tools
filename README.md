@@ -1,4 +1,4 @@
-# CI-CD Pipeline, Provisioning and Maintenance components for Informatica projects
+# Supporting modules for the devops tools
 
 ## Dependencies
 
@@ -39,4 +39,4 @@ MIT
 
 ## Examples
 
-Check the examples folder for more info on the structure of deploy lists.
+Check the examples folder in the Git repository devops-informatica-tools for more info on the structure of deploy lists.
