@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.8.1" />
+<title>supporting.errorcodes API documentation</title>
+<meta name="description" content="" />
+<link href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css' rel='stylesheet'>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/8.0.0/sanitize.min.css' rel='stylesheet'>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" rel="stylesheet">
+<style>.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>supporting.errorcodes</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">#  MIT License
+#
+#  Copyright (c) 2019 Jac. Beekers
+#
+#  Permission is hereby granted, free of charge, to any person obtaining a copy
+#  of this software and associated documentation files (the &#34;Software&#34;), to deal
+#  in the Software without restriction, including without limitation the rights
+#  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+#  copies of the Software, and to permit persons to whom the Software is
+#  furnished to do so, subject to the following conditions:
+#
+#  The above copyright notice and this permission notice shall be included in all
+#  copies or substantial portions of the Software.
+#
+#  THE SOFTWARE IS PROVIDED &#34;AS IS&#34;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+#  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#  SOFTWARE.
+#
+
+##
+# Errorcodes
+# @Since: 22-MAR-2019
+# @Author: Jac. Beekers
+# @Version: 20190322.0 - JBE - Initial
+
+import logging
+import supporting.errorcode as err
+
+# Returncode, ErrorCode, ErrorMessage, Resolution, Area, Severity
+
+OK = err.Errorcode(0, &#39;0&#39;, &#39;No errors encountered.&#39;, &#39;No action needed.&#39;, &#39;Result&#39;, logging.INFO)
+IGNORE = err.Errorcode(-1, &#39;GEN-0001&#39;, &#39;Ignored&#39;, &#39;No action needed.&#39;, &#39;Result&#39;, logging.WARNING)
+##
+# General errors, mostly related to environment and/or privileges
+LOGDIR_NOTSET = err.Errorcode(1, &#39;ENV-0001&#39;, &#39;LOGDIR not defined&#39;, &#39;Set the environment variable&#39;, &#39;Environment&#39;,
+                              logging.FATAL)
+LOGDIR_NF = err.Errorcode(1, &#39;ENV-0002&#39;, &#39;LOGDIR not found&#39;, &#39;Set the environment variable to an existing directory&#39;,
+                          &#39;Environment&#39;, logging.FATAL)
+LOGDIR_NW = err.Errorcode(1, &#39;ENV-0003&#39;, &#39;Cannot write to LOGDIR&#39;,
+                          &#39;Set the environment variable to a writeable directory&#39;, &#39;Environment&#39;, logging.FATAL)
+FILE_NF = err.Errorcode(1, &#39;ENV-0004&#39;, &#39;Cannot find file&#39;, &#39;Check the file\&#39;s path and permissions&#39;, &#39;Environment&#39;,
+                        logging.ERROR)
+FILE_NW = err.Errorcode(1, &#39;ENV-0005&#39;, &#39;Cannot write to file&#39;, &#39;Check the file\&#39;s path and permissions&#39;, &#39;Environment&#39;,
+                        logging.ERROR)
+##
+# General build-deploy-run related errors. Return code is 2
+DEPLOYLIST_NF = err.Errorcode(2, &#39;GENDEPLOY-0001&#39;, &#39;Deploylist not found&#39;, &#39;Check config directory and file name.&#39;,
+                              &#39;DatabaseArtifact&#39;, logging.FATAL)
+COMMAND_FAILED = err.Errorcode(2, &#39;GENRUN-0001&#39;, &#39;Command failed&#39;, &#39;Check command output&#39;, &#39;executeCommand&#39;,
+                               logging.ERROR)
+
+# Database artifact errors. Return code will be 10
+NO_DEPLOYLIST = err.Errorcode(10, &#39;DBDEPLOY-0001&#39;, &#39;No dbdeploylist defined&#39;, &#39;Set the environment variable&#39;,
+                              &#39;DatabaseArtifact&#39;, logging.FATAL)
+SOURCESQLDIR_NOTSET = err.Errorcode(10, &#39;DBDEPLOY-0002&#39;, &#39;SourceSqlDir is not defined&#39;, &#39;Set the environment variable&#39;,
+                                    &#39;DatabaseArtifact&#39;, logging.ERROR)
+TARGETSQLDIR_NOTSET = err.Errorcode(10, &#39;DBDEPLOY-0003&#39;, &#39;TargetSqlDir is not defined&#39;, &#39;Set the environment variable&#39;,
+                                    &#39;DatabaseArtifact&#39;, logging.ERROR)
+SQLFILE_NF = err.Errorcode(10, &#39;DBDEPLOY-0004&#39;, &#39;SQL file not found&#39;, &#39;Check the deploy file content&#39;,
+                           &#39;DatabaseArtifact&#39;, logging.ERROR)
+
+##
+# Directory based errors
+DIRECTORY_NF = err.Errorcode(10, &#39;DIRDEPLOY-0001&#39;, &#39;Directory not found&#39;, &#39;Check the deploy file content&#39;,
+                             &#39;DirectoryArtifact&#39;, logging.ERROR)
+
+##
+# Database deploy errors
+SQLPLUS_ERROR = err.Errorcode(10, &#39;DBDEPLOY-0005&#39;, &#39;sqlplus return an error.&#39;, &#39;Check the log output&#39;, &#39;DatabaseDeploy&#39;,
+                              logging.ERROR)
+
+# Informatica artifact errors. Return code will be 20
+NOT_IMPLEMENTED = err.Errorcode(20, &#39;INFACICD-0001&#39;,
+                                &#39;Result unknown. Function may not have been implemented completely&#39;,
+                                &#39;Ask your developer to implement the logic completely.&#39;, &#39;InformaticaArtifact&#39;,
+                                logging.WARNING)
+INFACMD_FAILED = err.Errorcode(20, &#39;INFACICD-0002&#39;, &#39;infacmd command failed.&#39;,
+                               &#39;Check the log and/or ask your administrator.&#39;, &#39;InformaticaArtifact&#39;, logging.ERROR)
+INFACMD_LIST_CONN_FAILED = err.Errorcode(20, &#39;INFACICD-0003&#39;, &#39;infacmd failed to list connections.&#39;,
+                                         &#39;Check the error message.&#39;, &#39;ListConnections&#39;, logging.ERROR)
+INFACMD_LIST_CONN_OPTIONS_FAILED = err.Errorcode(20, &#39;INFACICD-0004&#39;, &#39;infacmd failed to list connection options.&#39;,
+                                                 &#39;Check the error message.&#39;, &#39;ListConnectionOptions&#39;, logging.ERROR)
+INFACMD_NOCONNECTIONNAME = err.Errorcode(20, &#39;INFACICD-0005&#39;, &#39;No connection name provided.&#39;,
+                                         &#39;Provide a connection name for which you want the options to be listed.&#39;,
+                                         &#39;ListConnectionOptions&#39;, logging.ERROR)
+INFACMD_EXPORT_CONN_FAILED = err.Errorcode(20, &#39;INFACICD-0006&#39;, &#39;Export Connections failed.&#39;,
+                                           &#39;Check the error message.&#39;, &#39;ExportConnections&#39;, logging.ERROR)
+INFACMD_IMPORT_CONN_FAILED = err.Errorcode(20, &#39;INFACICD-0007&#39;, &#39;Import Connections failed.&#39;,
+                                           &#39;Check the error message.&#39;, &#39;ImportConnections&#39;, logging.ERROR)
+INVALID_DEPLOY_TYPE = err.Errorcode(20, &#39;INFACICD-0008&#39;, &#39;INTERNAL ERROR: Invalid deploy type.&#39;,
+                                    &#39;Internal error: Contact the development team.&#39;, &#39;InformaticaApp&#39;, logging.ERROR)
+
+# Informatica run errors. Return code will be 30
+INFACMD_NOPROFILE = err.Errorcode(30, &#39;INFARUN-0001&#39;, &#39;No profile name provided.&#39;,
+                                  &#39;Provide the complete path of the profile to be executed.&#39;, &#39;RunProfile&#39;,
+                                  logging.ERROR)
+INFACMD_PROFILE_FAILED = err.Errorcode(30, &#39;INFARUN-0002&#39;, &#39;infacmd run profile command failed.&#39;,
+                                       &#39;Check the log and/or ask your administrator.&#39;, &#39;RunProfile&#39;, logging.ERROR)
+INFACMD_NOSCORECARD = err.Errorcode(30, &#39;INFARUN-0003&#39;, &#39;No scorecard name provided.&#39;,
+                                    &#39;Provide the complete path of the scorecard to be executed.&#39;, &#39;RunScorecard&#39;,
+                                    logging.ERROR)
+INFACMD_SCORECARD_FAILED = err.Errorcode(30, &#39;INFARUN-0004&#39;, &#39;infacmd run scorecard command failed.&#39;,
+                                         &#39;Check the log and/or ask your administrator.&#39;, &#39;RunScorecard&#39;, logging.ERROR)
+INFACMD_NOMAPPING = err.Errorcode(30, &#39;INFARUN-0005&#39;, &#39;No mapping provided&#39;, &#39;Provide the mapping you want to run.&#39;,
+                                  &#39;RunMapping&#39;, logging.ERROR)
+INFACMD_NOAPPFORMAPPING = err.Errorcode(30, &#39;INFARUN-0006&#39;, &#39;Application of the mapping was not provided&#39;,
+                                        &#39;Provide the application that contains the mapping you want to run.&#39;,
+                                        &#39;RunMapping&#39;, logging.ERROR)
+INFACMD_MAPPING_FAILED = err.Errorcode(30, &#39;INFARUN-0007&#39;, &#39;infacmd run mapping command failed.&#39;,
+                                       &#39;Check the log and/or ask your administrator.&#39;, &#39;RunMapping&#39;, logging.ERROR)
+INFACMD_NOPROJECT = err.Errorcode(30, &#39;INFARUN-0008&#39;, &#39;No project name provided.&#39;,
+                                  &#39;Provide a name for the project to be created.&#39;, &#39;CreateProject&#39;, logging.ERROR)
+INFACMD_NOFOLDER = err.Errorcode(30, &#39;INFARUN-0009&#39;, &#39;No project and/or folder name provided.&#39;,
+                                 &#39;Provide the project and a name for the folder to be created.&#39;, &#39;CreateFolder&#39;,
+                                 logging.ERROR)
+INFACMD_CREATE_FOLDER_FAILED = err.Errorcode(30, &#39;INFARUN-0010&#39;, &#39;Folder could not be created.&#39;,
+                                             &#39;Check the error message.&#39;, &#39;CreateFolder&#39;, logging.ERROR)
+INFACMD_CREATE_PROJECT_FAILED = err.Errorcode(30, &#39;INFARUN-0011&#39;, &#39;Project could not be created.&#39;,
+                                              &#39;Check the error message.&#39;, &#39;CreateProject&#39;, logging.ERROR)
+INFACMD_DELETE_PROJECT_FAILED = err.Errorcode(30, &#39;INFARUN-0012&#39;, &#39;Project could not be removed.&#39;,
+                                              &#39;Check the error message.&#39;, &#39;DeleteProject&#39;, logging.ERROR)
+INFACMD_DELETE_FOLDER_FAILED = err.Errorcode(30, &#39;INFARUN-0012&#39;, &#39;Folder could not be removed.&#39;,
+                                             &#39;Check the error message.&#39;, &#39;DeleteFolder&#39;, logging.ERROR)
+INFACMD_NOWORKFLOW = err.Errorcode(30, &#39;INFARUN-0013&#39;, &#39;No application, workflow and/or wait provided&#39;,
+                                   &#39;You need to specify the application name, workflow and whether to wait (true) or not (false).&#39;,
+                                   &#39;RunWorkflow&#39;, logging.ERROR)
+INFACMD_WORKFLOW_FAILED = err.Errorcode(30, &#39;INFARUN-0014&#39;, &#39;Workflow failed.&#39;, &#39;Check the error message and logs.&#39;,
+                                        &#39;RunWorkflow&#39;, logging.ERROR)
+
+##
+# Manage Security errors
+INFACMD_NOUSERNAME = err.Errorcode(30, &#39;INFASEC-0001&#39;, &#39;No user name, password and/or full name provided.&#39;,
+                                   &#39;Provide a name, password, and full name for the user to be created.&#39;, &#39;CreateUser&#39;,
+                                   logging.ERROR)
+INFACMD_NOUSERNAME_DELETION = err.Errorcode(30, &#39;INFASEC-0002&#39;, &#39;No user name provided.&#39;,
+                                            &#39;Provide the username to be deleted.&#39;, &#39;DeleteUser&#39;, logging.ERROR)
+INFACMD_NOEXPORTFILENAME = err.Errorcode(30, &#39;INFASEC-0003&#39;, &#39;No export file name provided.&#39;,
+                                         &#39;Provide the name for the export file.&#39;, &#39;ExportUsersAndGroups&#39;, logging.ERROR)
+INFACMD_NOIMPORTFILENAME = err.Errorcode(30, &#39;INFASEC-0004&#39;, &#39;No import file name provided.&#39;,
+                                         &#39;Provide the name of the file to be imported.&#39;, &#39;ImportUsersAndGroups&#39;,
+                                         logging.ERROR)
+INFACMD_CREATE_USER_FAILED = err.Errorcode(30, &#39;INFASEC-0005&#39;, &#39;User creation failed.&#39;, &#39;Check the error message.&#39;,
+                                           &#39;CreateUser&#39;, logging.ERROR)
+INFACMD_DELETE_USER_FAILED = err.Errorcode(30, &#39;INFASEC-0006&#39;, &#39;User deletion failed.&#39;, &#39;Check the error message.&#39;,
+                                           &#39;DeleteUser&#39;, logging.ERROR)
+INFACMD_CREATE_GROUP_FAILED = err.Errorcode(30, &#39;INFASEC-0007&#39;, &#39;Group creation failed.&#39;, &#39;Check the error message.&#39;,
+                                            &#39;CreateGroup&#39;, logging.ERROR)
+INFACMD_DELETE_GROUP_FAILED = err.Errorcode(30, &#39;INFASEC-0018&#39;, &#39;Group deletion failed.&#39;, &#39;Check the error message.&#39;,
+                                            &#39;DeleteGroup&#39;, logging.ERROR)
+INFACMD_EXPORT_USRGRP_FAILED = err.Errorcode(30, &#39;INFASEC-0019&#39;, &#39;Users and groups export failed.&#39;,
+                                             &#39;Check the error message.&#39;, &#39;ExportUsersAndGroups&#39;, logging.ERROR)
+INFACMD_IMPORT_USRGRP_FAILED = err.Errorcode(30, &#39;INFASEC-0020&#39;, &#39;Users and groups import failed.&#39;,
+                                             &#39;Check the error message.&#39;, &#39;ImportUsersAndGroups&#39;, logging.ERROR)
+INFACMD_ADD_PERM_FAILED = err.Errorcode(30, &#39;INFASEC-0021&#39;, &#39;Permissions could not be added.&#39;,
+                                        &#39;Check the error message.&#39;, &#39;AddPermissions&#39;, logging.ERROR)
+INFACMD_REMOVE_PERM_FAILED = err.Errorcode(30, &#39;INFASEC-0023&#39;, &#39;Permissions could not be remvoed.&#39;,
+                                           &#39;Check the error message.&#39;, &#39;RemovePermissions&#39;, logging.ERROR)
+INFACMD_SET_CONN_FAILED = err.Errorcode(30, &#39;INFASEC-0024&#39;, &#39;Permissions could not be set.&#39;, &#39;Check the error message.&#39;,
+                                        &#39;SetPermissions&#39;, logging.ERROR)
+INFACMD_NOGROUPNAME = err.Errorcode(30, &#39;INFASEC-0025&#39;, &#39;No group name provided.&#39;,
+                                    &#39;Provide a name for the group to be created.&#39;, &#39;CreateGroup&#39;, logging.ERROR)
+INFACMD_NOGROUPNAME_DELETION = err.Errorcode(30, &#39;INFASEC-0026&#39;, &#39;No group name provided.&#39;,
+                                             &#39;Provide the name of the group to be deleted.&#39;, &#39;DeleteGroup&#39;,
+                                             logging.ERROR)
+
+##
+# Scheduler artifact errors
+INVALID_SCHEDULER_ENTRY_TYPE = err.Errorcode(40, &#39;SCHDEPLOY-0001&#39;, &#39;Invalid scheduler entry type.&#39;,
+                                             &#39;Provide a valid scheduler entry type, eg. dags, jobascode, plugin. Check schedulerConstants.py for more.&#39;,
+                                             &#39;SchedulerArtifact&#39;, logging.ERROR)
+SCHEDULERFILE_NF = err.Errorcode(41, &#39;SCHDEPLOY-0002&#39;, &#39;Scheduler file not found.&#39;,
+                                 &#39;Provide a valid scheduler file. Check the scheduler deploy list.&#39;,
+                                 &#39;SchedulerArtifact&#39;, logging.ERROR)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="supporting" href="index.html">supporting</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.8.1</a>.</p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad()</script>
+</body>
+</html>
