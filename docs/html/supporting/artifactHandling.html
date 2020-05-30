@@ -47,10 +47,13 @@
 #  SOFTWARE.
 #
 
+import datetime
+import logging
+import os
+
 import supporting.errorcodes as err
 import supporting.generalConstants as constants
-import logging, os, datetime
-import supporting
+from supporting.logging import customLogger
 
 # import repositorytools
 
@@ -58,6 +61,8 @@ now = datetime.datetime.now()
 result = err.OK
 
 logger = logging.getLogger(__name__)
+custom_logger = customLogger.CustomLogger(&#39;executeCommand&#39;, True)
+
 workspace = constants.DEFAULT_WORKSPACE
 
 
@@ -68,7 +73,7 @@ def get_artifact(artifact_name):
     # at the moment cicd runs in Azure DevOps and artifacts are stored within the pipeline.
 
     workspace = get_workspace()
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;workspace is &gt;&#39; + workspace + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;workspace is &gt;&#39; + workspace + &#34;&lt;.&#34;)
 
     return workspace + &#34;/&#34; + artifact_name
 
@@ -105,7 +110,7 @@ def store_artifact(artifact_name):
     # at the moment cicd runs in Azure DevOps and artifacts are stored within the pipeline.
 
     workspace = get_workspace()
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;workspace is &gt;&#39; + workspace + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;workspace is &gt;&#39; + workspace + &#34;&lt;.&#34;)
 
     return workspace + &#34;/&#34; + artifact_name</code></pre>
 </details>

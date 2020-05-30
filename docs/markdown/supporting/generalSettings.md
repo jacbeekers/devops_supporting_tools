@@ -4,7 +4,7 @@ Module supporting.generalSettings
 Variables
 ---------
 
-`logger`
+`custom_logger`
 :   defaults
 
 Functions

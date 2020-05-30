@@ -21,7 +21,8 @@
 #  SOFTWARE.
 #
 
-import logging, supporting
+import logging
+
 import supporting.errorcodes as err
 from supporting.logging import customLogger
 
@@ -29,6 +30,7 @@ logger = logging.getLogger(__name__)
 custom_logger = customLogger.CustomLogger('executeCommand', True)
 
 deployItems = []
+
 
 def getWorkitemList(deployList):
     thisproc = "processList"
@@ -48,13 +50,15 @@ def getWorkitemList(deployList):
                     line = line.rstrip('\n')
                     if line:
                         deployItems.append(line)
-                        custom_logger.log(logger, logging.DEBUG, thisproc, "line >" + str(entrynr) +"< added to worklist.")
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          "line >" + str(entrynr) + "< added to worklist.")
                     else:
-                        custom_logger.log(logger, logging.DEBUG, thisproc, "Ignoring empty line >" + str(entrynr) +"<.")
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          "Ignoring empty line >" + str(entrynr) + "<.")
     except IOError:
         custom_logger.log(logger, logging.ERROR, thisproc, "File not found")
         latestError = err.FILE_NF
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Completed with rc >" + str(latestError.rc) + "< and code >" + latestError.code + "<.")
+                      "Completed with rc >" + str(latestError.rc) + "< and code >" + latestError.code + "<.")
     return latestError, deployItems

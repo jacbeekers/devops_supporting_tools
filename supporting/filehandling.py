@@ -27,7 +27,10 @@
 # @Author: Jac. Beekers
 # @Version: 20190323.0 - JBE - Initial
 
-import contextlib, os, shutil
+import contextlib
+import os
+import shutil
+
 from supporting import generalSettings, randomize
 
 
@@ -61,4 +64,3 @@ def convert_content_to_array(file):
     with open(file, 'r') as f:
         list = f.read().splitlines()
     return list
-

@@ -52,12 +52,16 @@
 # @Since: 22-MAR-2019
 # @Author: Jac. Beekers
 # @Version: 20200301.0 - JBE - Added DO_NOT_RUN
+# @Version: 20200530.0 - JBE - Changes due to logging class
 
-import os, logging
-import supporting
+import logging
+import os
+
 import supporting.generalConstants as constants
+from supporting.logging import customLogger
 
 logger = logging.getLogger(__name__)
+custom_logger = customLogger.CustomLogger(&#39;executeCommand&#39;, True)
 
 &#34;&#34;&#34;defaults&#34;&#34;&#34;
 logDir = constants.DEFAULT_LOGDIR
@@ -67,34 +71,35 @@ configDir = constants.DEFAULT_CONFIGDIR
 sourceDir = constants.DEFAULT_SOURCEDIR
 do_not_run = constants.DEFAULT_DO_NOT_RUN
 
+
 def getenvvars():
     thisproc = &#34;getenvvars&#34;
     global logDir, resultDir, artifactDir, configDir, sourceDir, releaseID, do_not_run
 
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;started&#39;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;started&#39;)
 
     logDir = os.environ.get(constants.varLogDir, constants.DEFAULT_LOGDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;logDir set to &gt;&#39; + logDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;logDir set to &gt;&#39; + logDir + &#34;&lt;.&#34;)
 
     resultDir = os.environ.get(constants.varResultDir, constants.DEFAULT_RESULTDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;resultDir set to &gt;&#39; + resultDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;resultDir set to &gt;&#39; + resultDir + &#34;&lt;.&#34;)
 
     artifactDir = os.environ.get(constants.varArtifactDir, constants.DEFAULT_ARTIFACTDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;artifactDir set to &gt;&#39; + artifactDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;artifactDir set to &gt;&#39; + artifactDir + &#34;&lt;.&#34;)
 
     configDir = os.environ.get(constants.varConfigDir, constants.DEFAULT_CONFIGDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;configDir set to &gt;&#39; + configDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;configDir set to &gt;&#39; + configDir + &#34;&lt;.&#34;)
 
     sourceDir = os.environ.get(constants.varSourceDir, constants.DEFAULT_SOURCEDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;sourceDir set to &gt;&#39; + sourceDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;sourceDir set to &gt;&#39; + sourceDir + &#34;&lt;.&#34;)
 
     releaseID = os.environ.get(constants.varReleaseId, constants.DEFAULT_RELEASEID)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;releaseID set to &gt;&#39; + releaseID + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;releaseID set to &gt;&#39; + releaseID + &#34;&lt;.&#34;)
 
     do_not_run = os.environ.get(constants.varDoNotRun, constants.DEFAULT_DO_NOT_RUN)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;do_not_run set to &gt;&#39; + do_not_run + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;do_not_run set to &gt;&#39; + do_not_run + &#34;&lt;.&#34;)
 
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;completed&#39;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;completed&#39;)
 
 
 getenvvars()
@@ -104,7 +109,7 @@ def completePath(foundPath, prefixPath):
     if foundPath.startswith(&#34;/&#34;):
         return foundPath
     else:
-        return prefixPath +&#34;/&#34; + foundPath</code></pre>
+        return prefixPath + &#34;/&#34; + foundPath</code></pre>
 </details>
 </section>
 <section>
@@ -112,7 +117,7 @@ def completePath(foundPath, prefixPath):
 <section>
 <h2 class="section-title" id="header-variables">Global variables</h2>
 <dl>
-<dt id="supporting.generalSettings.logger"><code class="name">var <span class="ident">logger</span></code></dt>
+<dt id="supporting.generalSettings.custom_logger"><code class="name">var <span class="ident">custom_logger</span></code></dt>
 <dd>
 <div class="desc"><p>defaults</p></div>
 </dd>
@@ -134,7 +139,7 @@ def completePath(foundPath, prefixPath):
     if foundPath.startswith(&#34;/&#34;):
         return foundPath
     else:
-        return prefixPath +&#34;/&#34; + foundPath</code></pre>
+        return prefixPath + &#34;/&#34; + foundPath</code></pre>
 </details>
 </dd>
 <dt id="supporting.generalSettings.getenvvars"><code class="name flex">
@@ -150,30 +155,30 @@ def completePath(foundPath, prefixPath):
     thisproc = &#34;getenvvars&#34;
     global logDir, resultDir, artifactDir, configDir, sourceDir, releaseID, do_not_run
 
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;started&#39;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;started&#39;)
 
     logDir = os.environ.get(constants.varLogDir, constants.DEFAULT_LOGDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;logDir set to &gt;&#39; + logDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;logDir set to &gt;&#39; + logDir + &#34;&lt;.&#34;)
 
     resultDir = os.environ.get(constants.varResultDir, constants.DEFAULT_RESULTDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;resultDir set to &gt;&#39; + resultDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;resultDir set to &gt;&#39; + resultDir + &#34;&lt;.&#34;)
 
     artifactDir = os.environ.get(constants.varArtifactDir, constants.DEFAULT_ARTIFACTDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;artifactDir set to &gt;&#39; + artifactDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;artifactDir set to &gt;&#39; + artifactDir + &#34;&lt;.&#34;)
 
     configDir = os.environ.get(constants.varConfigDir, constants.DEFAULT_CONFIGDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;configDir set to &gt;&#39; + configDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;configDir set to &gt;&#39; + configDir + &#34;&lt;.&#34;)
 
     sourceDir = os.environ.get(constants.varSourceDir, constants.DEFAULT_SOURCEDIR)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;sourceDir set to &gt;&#39; + sourceDir + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;sourceDir set to &gt;&#39; + sourceDir + &#34;&lt;.&#34;)
 
     releaseID = os.environ.get(constants.varReleaseId, constants.DEFAULT_RELEASEID)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;releaseID set to &gt;&#39; + releaseID + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;releaseID set to &gt;&#39; + releaseID + &#34;&lt;.&#34;)
 
     do_not_run = os.environ.get(constants.varDoNotRun, constants.DEFAULT_DO_NOT_RUN)
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;do_not_run set to &gt;&#39; + do_not_run + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;do_not_run set to &gt;&#39; + do_not_run + &#34;&lt;.&#34;)
 
-    supporting.log(logger, logging.DEBUG, thisproc, &#39;completed&#39;)</code></pre>
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#39;completed&#39;)</code></pre>
 </details>
 </dd>
 </dl>
@@ -194,7 +199,7 @@ def completePath(foundPath, prefixPath):
 </li>
 <li><h3><a href="#header-variables">Global variables</a></h3>
 <ul class="">
-<li><code><a title="supporting.generalSettings.logger" href="#supporting.generalSettings.logger">logger</a></code></li>
+<li><code><a title="supporting.generalSettings.custom_logger" href="#supporting.generalSettings.custom_logger">custom_logger</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>

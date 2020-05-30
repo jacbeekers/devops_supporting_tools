@@ -29,11 +29,12 @@
 
 class Errorcode(object):
     # global variables
-    className ='errorcode'
+    className = 'errorcode'
+
     def __init__(self, rc, code, message, resolution, area, level):
-        self.rc=rc
-        self.code=code
-        self.message=message
-        self.resolution=resolution
-        self.area=area
-        self.level=level
+        self.rc = rc
+        self.code = code
+        self.message = message
+        self.resolution = resolution
+        self.area = area
+        self.level = level

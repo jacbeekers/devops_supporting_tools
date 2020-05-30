@@ -28,6 +28,7 @@
 # @Version: 20190322.0 - JBE - Initial
 
 import logging
+
 import supporting.errorcode as err
 
 # Returncode, ErrorCode, ErrorMessage, Resolution, Area, Severity

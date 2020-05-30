@@ -26,7 +26,6 @@ import os
 from pathlib import Path
 from zipfile import ZipFile
 
-import supporting
 import supporting.errorcodes as err
 from supporting.logging import customLogger
 
@@ -39,12 +38,12 @@ def generate_zip(basedirectory, directory, zipFileName, filter='*', suppress_ext
     result = err.OK
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Creating new zip >" + zipFileName + "<...")
+                      "Creating new zip >" + zipFileName + "<...")
     # create a ZipFile object
     with ZipFile(zipFileName, 'w') as zipObj:
         result = additemto_zip(zipObj, basedirectory, directory, filter, suppress_extension)
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Done. Result is: " + result.code)
+                      "Done. Result is: " + result.code)
 
     return result
 
@@ -54,7 +53,7 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter='*', suppres
 
     result = err.OK
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Adding to zip >" + zipFileName + "<...")
+                      "Adding to zip >" + zipFileName + "<...")
 
     # create a ZipFile object
     with ZipFile(zipFileName, 'a') as zipObj:
@@ -68,7 +67,7 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter='*', suppres
                 result = err.FILE_NF
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Done with result: " + result.code)
+                      "Done with result: " + result.code)
 
     return result
 
@@ -79,7 +78,7 @@ def addfileto_zip(zipObj, basedirectory, filename):
 
     filePath = os.path.join(basedirectory, filename)
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Adding file >" + filename + "< filePath is >" + filePath + "<.")
+                      "Adding file >" + filename + "< filePath is >" + filePath + "<.")
     if Path(filePath).is_file():
         archive_name = filePath[len(basedirectory):]
         zipObj.write(filePath, archive_name)
@@ -90,7 +89,7 @@ def addfileto_zip(zipObj, basedirectory, filename):
             result = err.FILE_NF
     else:
         custom_logger.log(logger, logging.ERROR, thisproc, "filePath >" + filePath + "< for >" + filename
-                       + "< could not be found.")
+                          + "< could not be found.")
         result = err.FILE_NF
     return result
 
@@ -100,31 +99,32 @@ def additemto_zip(zipObj, basedirectory, item, filter='*', suppress_extension='7
     result = err.OK
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Adding item >" + item + "< ...")
+                      "Adding item >" + item + "< ...")
 
     for folderName, subfolders, filenames in os.walk(item):
         for filename in filenames:
             if filename.endswith('.' + suppress_extension):
                 custom_logger.log(logger, logging.DEBUG, thisproc,
-                               "Ignoring >" + filename + "< as it has the extension >" + suppress_extension + "<.")
+                                  "Ignoring >" + filename + "< as it has the extension >" + suppress_extension + "<.")
             else:
                 if fnmatch.fnmatch(filename, filter):
                     filePath = os.path.join(folderName, filename)
                     # Add file to zip
                     archive_name = filePath[len(basedirectory):]
                     custom_logger.log(logger, logging.DEBUG, thisproc,
-                                   "Adding >" + filePath + "< to zip as >" + archive_name + "<.")
+                                      "Adding >" + filePath + "< to zip as >" + archive_name + "<.")
                     zipObj.write(filePath, archive_name)
                     try:
                         zipObj.getinfo(archive_name)
                     except KeyError:
-                        custom_logger.log(logger, logging.ERROR, thisproc, "File >" + filePath + "< could not be added.")
+                        custom_logger.log(logger, logging.ERROR, thisproc,
+                                          "File >" + filePath + "< could not be added.")
                         result = err.FILE_NF
                 else:
                     custom_logger.log(logger, logging.DEBUG, thisproc,
-                                   ">" + filename + "< was not added to zip as it does not match pattern >" + filter + "<.")
+                                      ">" + filename + "< was not added to zip as it does not match pattern >" + filter + "<.")
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
-                   "Done adding >" + item + "< with result: " + result.code)
+                      "Done adding >" + item + "< with result: " + result.code)
 
     return result

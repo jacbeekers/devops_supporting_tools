@@ -28,7 +28,9 @@
 # @Version: 20200301.0 - JBE - Added DO_NOT_RUN
 # @Version: 20200530.0 - JBE - Changes due to logging class
 
-import os, logging
+import logging
+import os
+
 import supporting.generalConstants as constants
 from supporting.logging import customLogger
 

@@ -13,28 +13,6 @@ Sub-modules
 * supporting.generalConstants
 * supporting.generalSettings
 * supporting.generatezip
+* supporting.logging
 * supporting.mask_password
 * supporting.randomize
-
-Functions
----------
-
-    
-`configurelogger(mainProc, console=True)`
-:   
-
-    
-`exitscript(resultlogger, result)`
-:   
-
-    
-`log(logger, level, area, message)`
-:   
-
-    
-`logentireenv()`
-:   
-
-    
-`writeresult(resultlogger, result)`
-:

@@ -47,11 +47,16 @@
 #  SOFTWARE.
 #
 
-import logging, supporting
+import logging
+
 import supporting.errorcodes as err
+from supporting.logging import customLogger
 
 logger = logging.getLogger(__name__)
+custom_logger = customLogger.CustomLogger(&#39;executeCommand&#39;, True)
+
 deployItems = []
+
 
 def getWorkitemList(deployList):
     thisproc = &#34;processList&#34;
@@ -59,27 +64,29 @@ def getWorkitemList(deployList):
     global entrynr
     entrynr = 0
     global level
-    supporting.log(logger, logging.DEBUG, thisproc, &#34;Started to work on deploy list &gt;&#34; + deployList + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#34;Started to work on deploy list &gt;&#34; + deployList + &#34;&lt;.&#34;)
 
     try:
         with open(deployList) as theList:
             for line in theList:
                 entrynr += 1
                 if line.startswith(&#34;#&#34;):
-                    supporting.log(logger, logging.DEBUG, thisproc, &#34;Ignoring comment line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc, &#34;Ignoring comment line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
                 else:
                     line = line.rstrip(&#39;\n&#39;)
                     if line:
                         deployItems.append(line)
-                        supporting.log(logger, logging.DEBUG, thisproc, &#34;line &gt;&#34; + str(entrynr) +&#34;&lt; added to worklist.&#34;)
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          &#34;line &gt;&#34; + str(entrynr) + &#34;&lt; added to worklist.&#34;)
                     else:
-                        supporting.log(logger, logging.DEBUG, thisproc, &#34;Ignoring empty line &gt;&#34; + str(entrynr) +&#34;&lt;.&#34;)
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          &#34;Ignoring empty line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
     except IOError:
-        supporting.log(logger, logging.ERROR, thisproc, &#34;File not found&#34;)
+        custom_logger.log(logger, logging.ERROR, thisproc, &#34;File not found&#34;)
         latestError = err.FILE_NF
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Completed with rc &gt;&#34; + str(latestError.rc) + &#34;&lt; and code &gt;&#34; + latestError.code + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Completed with rc &gt;&#34; + str(latestError.rc) + &#34;&lt; and code &gt;&#34; + latestError.code + &#34;&lt;.&#34;)
     return latestError, deployItems</code></pre>
 </details>
 </section>
@@ -105,27 +112,29 @@ def getWorkitemList(deployList):
     global entrynr
     entrynr = 0
     global level
-    supporting.log(logger, logging.DEBUG, thisproc, &#34;Started to work on deploy list &gt;&#34; + deployList + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc, &#34;Started to work on deploy list &gt;&#34; + deployList + &#34;&lt;.&#34;)
 
     try:
         with open(deployList) as theList:
             for line in theList:
                 entrynr += 1
                 if line.startswith(&#34;#&#34;):
-                    supporting.log(logger, logging.DEBUG, thisproc, &#34;Ignoring comment line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc, &#34;Ignoring comment line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
                 else:
                     line = line.rstrip(&#39;\n&#39;)
                     if line:
                         deployItems.append(line)
-                        supporting.log(logger, logging.DEBUG, thisproc, &#34;line &gt;&#34; + str(entrynr) +&#34;&lt; added to worklist.&#34;)
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          &#34;line &gt;&#34; + str(entrynr) + &#34;&lt; added to worklist.&#34;)
                     else:
-                        supporting.log(logger, logging.DEBUG, thisproc, &#34;Ignoring empty line &gt;&#34; + str(entrynr) +&#34;&lt;.&#34;)
+                        custom_logger.log(logger, logging.DEBUG, thisproc,
+                                          &#34;Ignoring empty line &gt;&#34; + str(entrynr) + &#34;&lt;.&#34;)
     except IOError:
-        supporting.log(logger, logging.ERROR, thisproc, &#34;File not found&#34;)
+        custom_logger.log(logger, logging.ERROR, thisproc, &#34;File not found&#34;)
         latestError = err.FILE_NF
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Completed with rc &gt;&#34; + str(latestError.rc) + &#34;&lt; and code &gt;&#34; + latestError.code + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Completed with rc &gt;&#34; + str(latestError.rc) + &#34;&lt; and code &gt;&#34; + latestError.code + &#34;&lt;.&#34;)
     return latestError, deployItems</code></pre>
 </details>
 </dd>

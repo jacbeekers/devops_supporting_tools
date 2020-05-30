@@ -46,29 +46,30 @@
 #  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 #  SOFTWARE.
 #
+import fnmatch
+import logging
+import os
 from pathlib import Path
+from zipfile import ZipFile
 
 import supporting.errorcodes as err
-from zipfile import ZipFile
-import os
-import logging
-import supporting
-import fnmatch
+from supporting.logging import customLogger
 
 logger = logging.getLogger(__name__)
+custom_logger = customLogger.CustomLogger(&#39;executeCommand&#39;, True)
 
 
 def generate_zip(basedirectory, directory, zipFileName, filter=&#39;*&#39;, suppress_extension=&#39;7Al!#%ˆˆ&#39;):
     thisproc = &#34;generate_zip&#34;
     result = err.OK
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Creating new zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Creating new zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;w&#39;) as zipObj:
         result = additemto_zip(zipObj, basedirectory, directory, filter, suppress_extension)
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done. Result is: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done. Result is: &#34; + result.code)
 
     return result
 
@@ -77,8 +78,8 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter=&#39;*&#39;,
     thisproc = &#34;addto_zip&#34;
 
     result = err.OK
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding to zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding to zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
 
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;a&#39;) as zipObj:
@@ -88,11 +89,11 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter=&#39;*&#39;,
             if Path(directory_or_file).is_dir():
                 result = additemto_zip(zipObj, basedirectory, directory_or_file, filter, suppress_extension)
             else:
-                supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file +&#34;&lt; not found.&#34;)
+                custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
                 result = err.FILE_NF
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done with result: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done with result: &#34; + result.code)
 
     return result
 
@@ -102,19 +103,19 @@ def addfileto_zip(zipObj, basedirectory, filename):
     result = err.OK
 
     filePath = os.path.join(basedirectory, filename)
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding file &gt;&#34; + filename + &#34;&lt; filePath is &gt;&#34; + filePath + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding file &gt;&#34; + filename + &#34;&lt; filePath is &gt;&#34; + filePath + &#34;&lt;.&#34;)
     if Path(filePath).is_file():
         archive_name = filePath[len(basedirectory):]
         zipObj.write(filePath, archive_name)
         try:
             zipObj.getinfo(archive_name)
         except KeyError:
-            supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filename + &#34;&lt; was not added.&#34;)
+            custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filename + &#34;&lt; was not added.&#34;)
             result = err.FILE_NF
     else:
-        supporting.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
-                       + &#34;&lt; could not be found.&#34;)
+        custom_logger.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
+                          + &#34;&lt; could not be found.&#34;)
         result = err.FILE_NF
     return result
 
@@ -123,33 +124,34 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     thisproc = &#34;additemto_zip&#34;
     result = err.OK
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
 
     for folderName, subfolders, filenames in os.walk(item):
         for filename in filenames:
             if filename.endswith(&#39;.&#39; + suppress_extension):
-                supporting.log(logger, logging.DEBUG, thisproc,
-                               &#34;Ignoring &gt;&#34; + filename + &#34;&lt; as it has the extension &gt;&#34; + suppress_extension + &#34;&lt;.&#34;)
+                custom_logger.log(logger, logging.DEBUG, thisproc,
+                                  &#34;Ignoring &gt;&#34; + filename + &#34;&lt; as it has the extension &gt;&#34; + suppress_extension + &#34;&lt;.&#34;)
             else:
                 if fnmatch.fnmatch(filename, filter):
                     filePath = os.path.join(folderName, filename)
                     # Add file to zip
                     archive_name = filePath[len(basedirectory):]
-                    supporting.log(logger, logging.DEBUG, thisproc,
-                                   &#34;Adding &gt;&#34; + filePath + &#34;&lt; to zip as &gt;&#34; + archive_name + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc,
+                                      &#34;Adding &gt;&#34; + filePath + &#34;&lt; to zip as &gt;&#34; + archive_name + &#34;&lt;.&#34;)
                     zipObj.write(filePath, archive_name)
                     try:
                         zipObj.getinfo(archive_name)
                     except KeyError:
-                        supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filePath + &#34;&lt; could not be added.&#34;)
+                        custom_logger.log(logger, logging.ERROR, thisproc,
+                                          &#34;File &gt;&#34; + filePath + &#34;&lt; could not be added.&#34;)
                         result = err.FILE_NF
                 else:
-                    supporting.log(logger, logging.DEBUG, thisproc,
-                                   &#34;&gt;&#34; + filename + &#34;&lt; was not added to zip as it does not match pattern &gt;&#34; + filter + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc,
+                                      &#34;&gt;&#34; + filename + &#34;&lt; was not added to zip as it does not match pattern &gt;&#34; + filter + &#34;&lt;.&#34;)
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done adding &gt;&#34; + item + &#34;&lt; with result: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done adding &gt;&#34; + item + &#34;&lt; with result: &#34; + result.code)
 
     return result</code></pre>
 </details>
@@ -175,19 +177,19 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     result = err.OK
 
     filePath = os.path.join(basedirectory, filename)
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding file &gt;&#34; + filename + &#34;&lt; filePath is &gt;&#34; + filePath + &#34;&lt;.&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding file &gt;&#34; + filename + &#34;&lt; filePath is &gt;&#34; + filePath + &#34;&lt;.&#34;)
     if Path(filePath).is_file():
         archive_name = filePath[len(basedirectory):]
         zipObj.write(filePath, archive_name)
         try:
             zipObj.getinfo(archive_name)
         except KeyError:
-            supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filename + &#34;&lt; was not added.&#34;)
+            custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filename + &#34;&lt; was not added.&#34;)
             result = err.FILE_NF
     else:
-        supporting.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
-                       + &#34;&lt; could not be found.&#34;)
+        custom_logger.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
+                          + &#34;&lt; could not be found.&#34;)
         result = err.FILE_NF
     return result</code></pre>
 </details>
@@ -205,33 +207,34 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     thisproc = &#34;additemto_zip&#34;
     result = err.OK
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
 
     for folderName, subfolders, filenames in os.walk(item):
         for filename in filenames:
             if filename.endswith(&#39;.&#39; + suppress_extension):
-                supporting.log(logger, logging.DEBUG, thisproc,
-                               &#34;Ignoring &gt;&#34; + filename + &#34;&lt; as it has the extension &gt;&#34; + suppress_extension + &#34;&lt;.&#34;)
+                custom_logger.log(logger, logging.DEBUG, thisproc,
+                                  &#34;Ignoring &gt;&#34; + filename + &#34;&lt; as it has the extension &gt;&#34; + suppress_extension + &#34;&lt;.&#34;)
             else:
                 if fnmatch.fnmatch(filename, filter):
                     filePath = os.path.join(folderName, filename)
                     # Add file to zip
                     archive_name = filePath[len(basedirectory):]
-                    supporting.log(logger, logging.DEBUG, thisproc,
-                                   &#34;Adding &gt;&#34; + filePath + &#34;&lt; to zip as &gt;&#34; + archive_name + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc,
+                                      &#34;Adding &gt;&#34; + filePath + &#34;&lt; to zip as &gt;&#34; + archive_name + &#34;&lt;.&#34;)
                     zipObj.write(filePath, archive_name)
                     try:
                         zipObj.getinfo(archive_name)
                     except KeyError:
-                        supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + filePath + &#34;&lt; could not be added.&#34;)
+                        custom_logger.log(logger, logging.ERROR, thisproc,
+                                          &#34;File &gt;&#34; + filePath + &#34;&lt; could not be added.&#34;)
                         result = err.FILE_NF
                 else:
-                    supporting.log(logger, logging.DEBUG, thisproc,
-                                   &#34;&gt;&#34; + filename + &#34;&lt; was not added to zip as it does not match pattern &gt;&#34; + filter + &#34;&lt;.&#34;)
+                    custom_logger.log(logger, logging.DEBUG, thisproc,
+                                      &#34;&gt;&#34; + filename + &#34;&lt; was not added to zip as it does not match pattern &gt;&#34; + filter + &#34;&lt;.&#34;)
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done adding &gt;&#34; + item + &#34;&lt; with result: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done adding &gt;&#34; + item + &#34;&lt; with result: &#34; + result.code)
 
     return result</code></pre>
 </details>
@@ -249,8 +252,8 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     thisproc = &#34;addto_zip&#34;
 
     result = err.OK
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Adding to zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Adding to zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
 
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;a&#39;) as zipObj:
@@ -260,11 +263,11 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
             if Path(directory_or_file).is_dir():
                 result = additemto_zip(zipObj, basedirectory, directory_or_file, filter, suppress_extension)
             else:
-                supporting.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file +&#34;&lt; not found.&#34;)
+                custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
                 result = err.FILE_NF
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done with result: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done with result: &#34; + result.code)
 
     return result</code></pre>
 </details>
@@ -282,13 +285,13 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     thisproc = &#34;generate_zip&#34;
     result = err.OK
 
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Creating new zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Creating new zip &gt;&#34; + zipFileName + &#34;&lt;...&#34;)
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;w&#39;) as zipObj:
         result = additemto_zip(zipObj, basedirectory, directory, filter, suppress_extension)
-    supporting.log(logger, logging.DEBUG, thisproc,
-                   &#34;Done. Result is: &#34; + result.code)
+    custom_logger.log(logger, logging.DEBUG, thisproc,
+                      &#34;Done. Result is: &#34; + result.code)
 
     return result</code></pre>
 </details>
