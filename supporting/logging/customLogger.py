@@ -26,6 +26,7 @@
 # @Since: 22-MAR-2019
 # @Author: Jac. Beekers
 # @Version: 20200530.0 - JBE - now a class
+# @Version: 20200610.0 - JBE - debug output to console
 
 import datetime
 import logging
@@ -79,6 +80,9 @@ class CustomLogger:
         return resultlogger
 
     def log(self, logger, level, area, message):
+        if self.log_on_console:
+            print(logging.getLevelName(level) + " - " + area + " - " + message)
+
         logger.log(level, area + " - " + message)
         return
 
