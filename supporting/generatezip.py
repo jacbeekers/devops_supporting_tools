@@ -61,10 +61,10 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter='*', suppres
         if Path(basedirectory + "/" + directory_or_file).is_file() :
             result = addfileto_zip(zipObj, basedirectory, directory_or_file)
         else:
-            if Path(directory_or_file).is_dir():
+            if Path(basedirectory + "/" + directory_or_file).is_dir():
                 result = additemto_zip(zipObj, basedirectory, directory_or_file, filter, suppress_extension)
             else:
-                custom_logger.log(logger, logging.ERROR, thisproc, "File >" + directory_or_file + "< not found.")
+                custom_logger.log(logger, logging.ERROR, thisproc, "Item >" + directory_or_file + "< not found.")
                 result = err.FILE_NF
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
@@ -102,7 +102,7 @@ def additemto_zip(zipObj, basedirectory, item, filter='*', suppress_extension='7
     custom_logger.log(logger, logging.DEBUG, thisproc,
                       "Adding item >" + item + "< ...")
 
-    for folderName, subfolders, filenames in os.walk(item):
+    for folderName, subfolders, filenames in os.walk(basedirectory + item):
         for filename in filenames:
             if filename.endswith('.' + suppress_extension):
                 custom_logger.log(logger, logging.DEBUG, thisproc,
