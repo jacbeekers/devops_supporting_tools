@@ -49,6 +49,7 @@
 import fnmatch
 import logging
 import os
+from os.path import abspath
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -83,13 +84,13 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter=&#39;*&#39;,
 
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;a&#39;) as zipObj:
-        if Path(directory_or_file).is_file():
+        if Path(basedirectory + &#34;/&#34; + directory_or_file).is_file() :
             result = addfileto_zip(zipObj, basedirectory, directory_or_file)
         else:
-            if Path(directory_or_file).is_dir():
+            if Path(basedirectory + &#34;/&#34; + directory_or_file).is_dir():
                 result = additemto_zip(zipObj, basedirectory, directory_or_file, filter, suppress_extension)
             else:
-                custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
+                custom_logger.log(logger, logging.ERROR, thisproc, &#34;Item &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
                 result = err.FILE_NF
 
     custom_logger.log(logger, logging.DEBUG, thisproc,
@@ -115,7 +116,7 @@ def addfileto_zip(zipObj, basedirectory, filename):
             result = err.FILE_NF
     else:
         custom_logger.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
-                          + &#34;&lt; could not be found.&#34;)
+                          + &#34;&lt; could not be found. Absolute path is &gt;&#34; + abspath(Path(filePath)))
         result = err.FILE_NF
     return result
 
@@ -127,7 +128,7 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     custom_logger.log(logger, logging.DEBUG, thisproc,
                       &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
 
-    for folderName, subfolders, filenames in os.walk(item):
+    for folderName, subfolders, filenames in os.walk(basedirectory + item):
         for filename in filenames:
             if filename.endswith(&#39;.&#39; + suppress_extension):
                 custom_logger.log(logger, logging.DEBUG, thisproc,
@@ -189,7 +190,7 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
             result = err.FILE_NF
     else:
         custom_logger.log(logger, logging.ERROR, thisproc, &#34;filePath &gt;&#34; + filePath + &#34;&lt; for &gt;&#34; + filename
-                          + &#34;&lt; could not be found.&#34;)
+                          + &#34;&lt; could not be found. Absolute path is &gt;&#34; + abspath(Path(filePath)))
         result = err.FILE_NF
     return result</code></pre>
 </details>
@@ -210,7 +211,7 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
     custom_logger.log(logger, logging.DEBUG, thisproc,
                       &#34;Adding item &gt;&#34; + item + &#34;&lt; ...&#34;)
 
-    for folderName, subfolders, filenames in os.walk(item):
+    for folderName, subfolders, filenames in os.walk(basedirectory + item):
         for filename in filenames:
             if filename.endswith(&#39;.&#39; + suppress_extension):
                 custom_logger.log(logger, logging.DEBUG, thisproc,
@@ -257,13 +258,13 @@ def additemto_zip(zipObj, basedirectory, item, filter=&#39;*&#39;, suppress_exte
 
     # create a ZipFile object
     with ZipFile(zipFileName, &#39;a&#39;) as zipObj:
-        if Path(directory_or_file).is_file():
+        if Path(basedirectory + &#34;/&#34; + directory_or_file).is_file() :
             result = addfileto_zip(zipObj, basedirectory, directory_or_file)
         else:
-            if Path(directory_or_file).is_dir():
+            if Path(basedirectory + &#34;/&#34; + directory_or_file).is_dir():
                 result = additemto_zip(zipObj, basedirectory, directory_or_file, filter, suppress_extension)
             else:
-                custom_logger.log(logger, logging.ERROR, thisproc, &#34;File &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
+                custom_logger.log(logger, logging.ERROR, thisproc, &#34;Item &gt;&#34; + directory_or_file + &#34;&lt; not found.&#34;)
                 result = err.FILE_NF
 
     custom_logger.log(logger, logging.DEBUG, thisproc,

@@ -52,6 +52,7 @@
 # @Since: 22-MAR-2019
 # @Author: Jac. Beekers
 # @Version: 20200530.0 - JBE - now a class
+# @Version: 20200610.0 - JBE - debug output to console
 
 import datetime
 import logging
@@ -79,7 +80,7 @@ class CustomLogger:
 
         # nice for Azure DevOps, but not for Airflow
         if self.log_on_console:
-            self.console = logging.StreamHandler()
+            self.console = logging.StreamHandler(sys.stdout)
             self.console.setLevel(logging.DEBUG)
             formatter = logging.Formatter(&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;)
             # tell the handler to use this format
@@ -105,6 +106,9 @@ class CustomLogger:
         return resultlogger
 
     def log(self, logger, level, area, message):
+        if self.log_on_console:
+            print(logging.getLevelName(level) + &#34; - &#34; + area + &#34; - &#34; + message)
+
         logger.log(level, area + &#34; - &#34; + message)
         return
 
@@ -163,7 +167,7 @@ class CustomLogger:
 
         # nice for Azure DevOps, but not for Airflow
         if self.log_on_console:
-            self.console = logging.StreamHandler()
+            self.console = logging.StreamHandler(sys.stdout)
             self.console.setLevel(logging.DEBUG)
             formatter = logging.Formatter(&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;)
             # tell the handler to use this format
@@ -189,6 +193,9 @@ class CustomLogger:
         return resultlogger
 
     def log(self, logger, level, area, message):
+        if self.log_on_console:
+            print(logging.getLevelName(level) + &#34; - &#34; + area + &#34; - &#34; + message)
+
         logger.log(level, area + &#34; - &#34; + message)
         return
 
@@ -230,7 +237,7 @@ class CustomLogger:
 
     # nice for Azure DevOps, but not for Airflow
     if self.log_on_console:
-        self.console = logging.StreamHandler()
+        self.console = logging.StreamHandler(sys.stdout)
         self.console.setLevel(logging.DEBUG)
         formatter = logging.Formatter(&#39;%(asctime)s - %(name)s - %(levelname)s - %(message)s&#39;)
         # tell the handler to use this format
@@ -280,6 +287,9 @@ class CustomLogger:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def log(self, logger, level, area, message):
+    if self.log_on_console:
+        print(logging.getLevelName(level) + &#34; - &#34; + area + &#34; - &#34; + message)
+
     logger.log(level, area + &#34; - &#34; + message)
     return</code></pre>
 </details>
