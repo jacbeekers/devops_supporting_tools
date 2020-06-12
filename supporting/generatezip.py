@@ -58,7 +58,7 @@ def addto_zip(basedirectory, directory_or_file, zipFileName, filter='*', suppres
 
     # create a ZipFile object
     with ZipFile(zipFileName, 'a') as zipObj:
-        if Path(directory_or_file).is_file():
+        if Path(basedirectory + "/" + directory_or_file).is_file() :
             result = addfileto_zip(zipObj, basedirectory, directory_or_file)
         else:
             if Path(directory_or_file).is_dir():
