@@ -54,7 +54,7 @@ class CustomLogger:
 
         # nice for Azure DevOps, but not for Airflow
         if self.log_on_console:
-            self.console = logging.StreamHandler()
+            self.console = logging.StreamHandler(sys.stdout)
             self.console.setLevel(logging.DEBUG)
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             # tell the handler to use this format
