@@ -23,6 +23,7 @@
 import fnmatch
 import logging
 import os
+from os.path import abspath
 from pathlib import Path
 from zipfile import ZipFile
 
@@ -89,7 +90,7 @@ def addfileto_zip(zipObj, basedirectory, filename):
             result = err.FILE_NF
     else:
         custom_logger.log(logger, logging.ERROR, thisproc, "filePath >" + filePath + "< for >" + filename
-                          + "< could not be found.")
+                          + "< could not be found. Absolute path is >" + abspath(Path(filePath)))
         result = err.FILE_NF
     return result
 
